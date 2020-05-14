@@ -31,7 +31,7 @@ asm_fib:
 		str r0, [fp, #R1_OFFSET]	// save returned value of first call to fib() in R1 (fp holds base address of lr)
 		pop {r0-r1, fp, lr}			// r0 now what it was before 1st fib() call, and r1 holds return val of 1st fib() call
 		
-		sub r0, r0, #1
+		sub r0, r0, #2
 		bl asm_fib
 		
 		ldr r1, [fp, #R1_OFFSET]	// get return val in r1 after 1st call to fib()
