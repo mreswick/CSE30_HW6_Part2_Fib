@@ -28,13 +28,13 @@ asm_fib:
 		sub r0, r0, #1
 		bl asm_fib
 		
-		str r0, [fp, #R1_OFFSET]	// save returned value of first call to fib() in R1 (fp holds base address of lr)
+		str r0, [fp, #R4_OFFSET]	// save returned value of first call to fib() in R1 (fp holds base address of lr)
 		pop {r0, r4, fp, lr}			// r0 now what it was before 1st fib() call, and r1 holds return val of 1st fib() call
 		
 		sub r0, r0, #2
 		bl asm_fib
 		
-		ldr r4, [fp, #R1_OFFSET]	// get return val in r1 after 1st call to fib()
+		ldr r4, [fp, #R4_OFFSET]	// get return val in r1 after 1st call to fib()
 		add r0, r0, r4				// r0 = fib1() + fib2() // (r0 in sum holds return val after 2nd call to fib())
 		add sp, sp, #8				// get rid of r0 and r1 in memory (without changing r0, which currently holds needed return value)
 		pop {fp, lr}				// de-allocate the rest of it
