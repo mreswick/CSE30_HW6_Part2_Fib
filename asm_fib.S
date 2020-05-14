@@ -7,6 +7,7 @@
 	//TODO: Define more offsets for storing stack variables here
 	
 	.equ	R4_OFFSET, -8
+	.equ	R0_OFFSET, -12
 
 // TODO: Write fibonacci code here
 
@@ -19,7 +20,7 @@ asm_fib:
 		bgt RECURS
 		mov r0, #1
 		
-		add sp, sp, #8		// get rid of r0 and r1 in memory
+		add sp, sp, #8		// get rid of r0 and r4 in memory
 		pop {fp, lr}		// really just want to pop fp, but need to pass an even number of registers
 		bx lr
 		
@@ -28,8 +29,11 @@ asm_fib:
 		sub r0, r0, #1
 		bl asm_fib
 		
-		str r0, [fp, #R4_OFFSET]	// save returned value of first call to fib() in R1 (fp holds base address of lr)
-		pop {r0, r4, fp, lr}			// r0 now what it was before 1st fib() call, and r1 holds return val of 1st fib() call
+		str r0, [fp, #R4_OFFSET]	// save returned value of first call to fib() in R4 (fp holds base address of lr)
+		// pop {r0, r4, fp, lr}			// r0 now what it was before 1st fib() call, and r4 holds return val of 1st fib() call
+		ldr r0, [fp, #R0_OFFSET]		// r0 now what it was before 1st fib() call
+		ldr r4, [fp, #R4_OFFSET]		// r4 now holds return value of 1st fib() call
+		
 		
 		sub r0, r0, #2
 		bl asm_fib
