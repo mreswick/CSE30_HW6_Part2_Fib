@@ -40,7 +40,6 @@ asm_fib:									// asm_fib(int r0/n)
 											//
 		str r0, [fp, #i_OLDER4_OFFSET]		// 		i = r0/n;
 		ldr r0, [fp, #R0_OFFSET]			// 		r0/n = *r0 (what it was before fib(n-1) call)
-	/*?*/	ldr r4, [fp, #i_OLDER4_OFFSET]	// 		r4 now holds return value of 1st fib() call
 											//				
 		sub r0, r0, #2						//		r0/n = r0/n - 2;
 		bl asm_fib							//		fib(r0/n);
