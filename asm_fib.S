@@ -48,10 +48,9 @@ asm_fib:
 		ldr r4, [fp, #i_OLDER4_OFFSET]	// get return val in r1 after 1st call to fib()
 		add r0, r0, r4				// r0 = fib1() + fib2() // (r0 in sum holds return val after 2nd call to fib())
 		add sp, sp, #LOCAL_VAR_SPACE		// get rid of i and padding space
-		add sp, sp, #8				// get rid of r0 and r1 in memory (without changing r0, which currently holds needed return value)
+		ldr r4, [fp, #R4_OFFSET]	// load R4 back to what it was in caller
+		add sp, sp, #8				// get rid of r0 and r4 in memory (without changing r0, which currently holds needed return value)
 		pop {fp, lr}				// de-allocate the rest of it
-		
-		ldr r4, [fp, 
 		
 		bx lr						// return
 	END:
