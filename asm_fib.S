@@ -43,3 +43,4 @@ asm_fib:
 		add sp, sp, #8				// get rid of r0 and r1 in memory (without changing r0, which currently holds needed return value)
 		pop {fp, lr}				// de-allocate the rest of it
 		bx lr						// return
+	END:
