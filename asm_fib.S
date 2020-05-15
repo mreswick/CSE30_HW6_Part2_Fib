@@ -19,13 +19,13 @@ asm_fib:
 		push {r0, r4, fp, lr}
 		add fp, sp, #FP_OFFSET
 		
-		sub sp, sp, LOCAL_VAR_SPACE
+		sub sp, sp, #LOCAL_VAR_SPACE
 		
 		cmp r0, #1
 		bgt RECURS
 		mov r0, #1
 		
-		add sp, sp, LOCAL_VAR_SPACE	// deallocate local variables (i and padding space)
+		add sp, sp, #LOCAL_VAR_SPACE	// deallocate local variables (i and padding space)
 		
 		add sp, sp, #8		// get rid of r0 and r4 in memory
 		pop {fp, lr}		// really just want to pop fp, but need to pass an even number of registers
